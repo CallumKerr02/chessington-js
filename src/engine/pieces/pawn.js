@@ -1,11 +1,30 @@
 import Piece from './piece';
+import Square from "./../square"
+import Player from '../player';
 
 export default class Pawn extends Piece {
     constructor(player) {
         super(player);
     }
 
-    getAvailableMoves(board) {
-        return new Array(0);
+    getAvailableMoves(board) { 
+        const currentSquare = board.findPiece(this);
+        if (this.player === Player.WHITE){
+            if (currentSquare.row === 1){
+                return [Square.at(currentSquare.row + 2, currentSquare.col), Square.at(currentSquare.row + 1, currentSquare.col)];
+            }
+            else{
+                return [Square.at(currentSquare.row + 1, currentSquare.col)];
+            }
+
+        }
+        if (this.player === Player.BLACK){
+            if (currentSquare.row === 6){
+                return [Square.at(currentSquare.row -2 , currentSquare.col), Square.at(currentSquare.row - 1, currentSquare.col)];
+        }
+        else{
+            return [Square.at(currentSquare.row -1, currentSquare.col)];
+        }
+        }
     }
 }
